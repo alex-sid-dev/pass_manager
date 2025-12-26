@@ -15,8 +15,7 @@ def create_db():
                        login
                        TEXT
                        NOT
-                       NULL
-                       UNIQUE,
+                       NULL,
                        password
                        TEXT
                        NOT
