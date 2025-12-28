@@ -1,16 +1,46 @@
+from tkinter import ttk
+
+from src.buttons.on_create import on_create
+from src.buttons.or_read import on_read
 from src.create_db import create_db
-from src.create_password import create_password
-from src.crypto import PasswordCipher
-from src.delete_password import delete_password
-from src.read_password import read_password
+import tkinter as tk
 
 if __name__ == "__main__":
     create_db()
-    cipher = PasswordCipher()
-    password = cipher.encrypt("password542")
+    root = tk.Tk()
+    root.title("Password Manager")
+    root.geometry("600x350")
+    root.resizable(False, False)
 
-    create_password(login="user", password=password, description="abc")
-    password1 = read_password("abc")
-    delete_password("abc")
-    password2 = read_password("abc")
+    # Основной контейнер
+    main_frame = ttk.Frame(root, padding=20)
+    main_frame.pack(expand=True)
 
+    # Заголовок
+    title = ttk.Label(
+        main_frame,
+        text="Менеджер паролей",
+        font=("Segoe UI", 14, "bold")
+    )
+    title.pack(pady=(0, 20))
+
+    # Кнопки
+    btn_create = ttk.Button(
+        main_frame,
+        text="Создать",
+        command=on_create,
+        width=20
+    )
+    btn_create.pack(pady=5)
+
+    btn_read = ttk.Button(
+        main_frame,
+        text="Прочитать",
+        command=on_read,
+        width=20
+    )
+    btn_read.pack(pady=5)
+
+
+
+    root.mainloop()
