@@ -2,10 +2,10 @@ import sqlite3
 from tkinter import messagebox
 from loguru import logger
 
-from src.crypto import PasswordCipher
+from src.crypto_utils.crypto import PasswordCipher
 
 
-def update_password(id: int, new_login: str, new_description: str, new_password: str):
+def update_password(id: int, new_login: str, new_description: str, new_password: str, cipher: PasswordCipher):
     conn = sqlite3.connect("passwords")
     cursor = conn.cursor()
     if new_login is None and new_password is None and new_description is None:
@@ -16,7 +16,6 @@ def update_password(id: int, new_login: str, new_description: str, new_password:
         # формируем SET часть запроса динамически
         updates = []
         params = []
-        cipher = PasswordCipher()
 
         if new_login is not None:
             updates.append("login = ?")

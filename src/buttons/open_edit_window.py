@@ -1,11 +1,11 @@
 from tkinter import Toplevel, ttk
 
-from src.crypto import PasswordCipher
+from src.crypto_utils.crypto import PasswordCipher
 from src.models.passwords import PasswordForChange
-from src.update_password import update_password
+from src.database.update_password import update_password
 
 
-def open_edit_window(tree, id, item_id, login, password, description):
+def open_edit_window(tree, id, item_id, login, password, description, cipher):
     win = Toplevel()
     win.title("Редактировать запись")
     win.geometry("600x350")
@@ -36,7 +36,6 @@ def open_edit_window(tree, id, item_id, login, password, description):
     e_desc.pack(fill="x", pady=5)
 
     def save():
-        cipher = PasswordCipher()
         new_pwd = PasswordForChange(
             id=int(e_id.get()),
             login=e_login.get().strip(),
@@ -48,7 +47,8 @@ def open_edit_window(tree, id, item_id, login, password, description):
             id=int(e_id.get()),
             new_login=e_login.get().strip(),
             new_password=new_pwd.password,
-            new_description=e_desc.get().strip()
+            new_description=e_desc.get().strip(),
+            cipher=cipher
         )
 
         tree.item(

@@ -1,10 +1,10 @@
 from tkinter import ttk, Toplevel, messagebox
 
-from src.create_password import create_password
-from src.crypto import PasswordCipher
+from src.database.create_password import create_password
+from src.crypto_utils.crypto import PasswordCipher
 from src.models.passwords import Password
 
-def on_create():
+def on_create(cipher: PasswordCipher):
     win = Toplevel()
     win.title("Создать пароль")
     win.geometry("600x350")
@@ -29,7 +29,6 @@ def on_create():
     def save():
         login = entry_login.get().strip()
         password = entry_password.get().strip()
-        cipher = PasswordCipher()
         password_cipher = cipher.encrypt(password)
         desc = entry_desc.get().strip()
 

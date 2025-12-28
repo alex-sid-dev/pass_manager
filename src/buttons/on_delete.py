@@ -1,6 +1,6 @@
 from tkinter import ttk, messagebox
 
-from src.delete_password import delete_passwords
+from src.database.delete_password import delete_passwords
 
 
 def delete_selected(tree: ttk.Treeview):
