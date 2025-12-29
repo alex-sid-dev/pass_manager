@@ -2,3 +2,4 @@ secret.key
 passwords
 .venv
 .idea
+salt.bin
