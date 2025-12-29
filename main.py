@@ -1,14 +1,11 @@
-import hashlib
 from tkinter import ttk, messagebox
 
 from src.crypto_utils.crypto import PasswordCipher
+from src.crypto_utils.hash_password import hash_password
 from src.database.create_db import create_db, get_master_hash, set_master_hash, create_master_db
 import tkinter as tk
 from src.buttons.on_create import on_create
 from src.buttons.or_read import on_read
-
-def hash_password(password: str) -> str:
-    return hashlib.sha256(password.encode()).hexdigest()
 
 
 def open_main_window(cipher: PasswordCipher):
@@ -28,8 +25,6 @@ def open_main_window(cipher: PasswordCipher):
 
     root.mainloop()
 
-    root.mainloop()
-
 
 def ask_for_password(stored_hash):
     def check_password():
@@ -45,7 +40,7 @@ def ask_for_password(stored_hash):
 
     login_window = tk.Tk()
     login_window.title("Вход")
-    login_window.geometry("600x150")
+    login_window.geometry("400x150")
     login_window.resizable(False, False)
 
     ttk.Label(login_window, text="Введите мастер-пароль:", font=("Segoe UI", 12)).pack(pady=10)
