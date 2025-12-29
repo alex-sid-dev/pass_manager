@@ -6,5 +6,6 @@ class Password(BaseModel):
     password: str
     description: str
 
+
 class PasswordForChange(Password):
     id: int

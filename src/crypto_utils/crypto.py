@@ -1,11 +1,19 @@
+import base64
 import os
+from pathlib import Path
+
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-import base64
+
+BASE_DIR = Path(__file__).resolve().parent
+while BASE_DIR.name != "pass_manager":
+    BASE_DIR = BASE_DIR.parent
+salt_file_dir = BASE_DIR / "salt.bin"
+
 
 class PasswordCipher:
-    def __init__(self, master_password: str, salt_file="salt.bin"):
+    def __init__(self, master_password: str, salt_file=salt_file_dir):
         self.salt_file = salt_file
         self.salt = self._load_or_create_salt()
         self.key = self._derive_key(master_password)
@@ -38,5 +46,3 @@ class PasswordCipher:
     def decrypt(self, encrypted_password: str) -> str:
         decrypted = self.cipher.decrypt(encrypted_password.encode())
         return decrypted.decode()
-
-

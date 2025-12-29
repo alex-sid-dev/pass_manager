@@ -3,8 +3,8 @@ from tkinter import messagebox, Toplevel, ttk
 from src.buttons.on_delete import delete_selected
 from src.buttons.on_edit import edit_selected
 from src.crypto_utils.crypto import PasswordCipher
-from src.models.passwords import PasswordForChange
 from src.database.read_password import read_passwords
+from src.models.passwords import PasswordForChange
 
 
 def on_read(cipher: PasswordCipher):

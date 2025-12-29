@@ -1,8 +1,7 @@
 from tkinter import Toplevel, ttk
 
-from src.crypto_utils.crypto import PasswordCipher
-from src.models.passwords import PasswordForChange
 from src.database.update_password import update_password
+from src.models.passwords import PasswordForChange
 
 
 def open_edit_window(tree, id, item_id, login, password, description, cipher):

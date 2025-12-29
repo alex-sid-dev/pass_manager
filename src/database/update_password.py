@@ -1,12 +1,19 @@
 import sqlite3
+from pathlib import Path
 from tkinter import messagebox
+
 from loguru import logger
 
 from src.crypto_utils.crypto import PasswordCipher
 
+BASE_DIR = Path(__file__).resolve().parent
+while BASE_DIR.name != "pass_manager":
+    BASE_DIR = BASE_DIR.parent
+passwords_file_dir = BASE_DIR / "passwords"
+
 
 def update_password(id: int, new_login: str, new_description: str, new_password: str, cipher: PasswordCipher):
-    conn = sqlite3.connect("passwords")
+    conn = sqlite3.connect(passwords_file_dir)
     cursor = conn.cursor()
     if new_login is None and new_password is None and new_description is None:
         messagebox.showinfo("Обновление", "Нет данных для обновления")

@@ -1,11 +1,11 @@
+import tkinter as tk
 from tkinter import ttk, messagebox
 
+from src.buttons.on_create import on_create
+from src.buttons.or_read import on_read
 from src.crypto_utils.crypto import PasswordCipher
 from src.crypto_utils.hash_password import hash_password
 from src.database.create_db import create_db, get_master_hash, set_master_hash, create_master_db
-import tkinter as tk
-from src.buttons.on_create import on_create
-from src.buttons.or_read import on_read
 
 
 def open_main_window(cipher: PasswordCipher):

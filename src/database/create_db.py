@@ -1,8 +1,14 @@
 import sqlite3
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+while BASE_DIR.name != "pass_manager":
+    BASE_DIR = BASE_DIR.parent
+passwords_file_dir = BASE_DIR / "passwords"
 
 
 def create_master_db():
-    conn = sqlite3.connect("passwords")
+    conn = sqlite3.connect(passwords_file_dir)
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS master
                  (
@@ -20,7 +26,7 @@ def create_master_db():
 
 
 def get_master_hash():
-    conn = sqlite3.connect("passwords")
+    conn = sqlite3.connect(passwords_file_dir)
     c = conn.cursor()
     c.execute("SELECT password_hash FROM master WHERE id=1")
     result = c.fetchone()
@@ -29,7 +35,7 @@ def get_master_hash():
 
 
 def set_master_hash(password_hash):
-    conn = sqlite3.connect("passwords")
+    conn = sqlite3.connect(passwords_file_dir)
     c = conn.cursor()
     c.execute("INSERT INTO master (id, password_hash) VALUES (1, ?)", (password_hash,))
     conn.commit()
@@ -37,7 +43,7 @@ def set_master_hash(password_hash):
 
 
 def create_db():
-    conn = sqlite3.connect("passwords")
+    conn = sqlite3.connect(passwords_file_dir)
     cursor = conn.cursor()
     cursor.execute("""
                    CREATE TABLE IF NOT EXISTS passwords

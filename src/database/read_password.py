@@ -1,13 +1,19 @@
-from loguru import logger
 import sqlite3
-
+from pathlib import Path
 from typing import List
+
+from loguru import logger
 
 from src.models.passwords import PasswordForChange
 
+BASE_DIR = Path(__file__).resolve().parent
+while BASE_DIR.name != "pass_manager":
+    BASE_DIR = BASE_DIR.parent
+passwords_file_dir = BASE_DIR / "passwords"
+
 
 def read_passwords(description: str) -> List[PasswordForChange]:
-    conn = sqlite3.connect("passwords")
+    conn = sqlite3.connect(passwords_file_dir)
     cursor = conn.cursor()
     try:
         cursor.execute("""

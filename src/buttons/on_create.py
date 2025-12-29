@@ -1,8 +1,9 @@
 from tkinter import ttk, Toplevel, messagebox
 
-from src.database.create_password import create_password
 from src.crypto_utils.crypto import PasswordCipher
+from src.database.create_password import create_password
 from src.models.passwords import Password
+
 
 def on_create(cipher: PasswordCipher):
     win = Toplevel()
