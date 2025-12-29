@@ -3,3 +3,5 @@ passwords
 .venv
 .idea
 salt.bin
+__pycache__/
+*.py[cod]
