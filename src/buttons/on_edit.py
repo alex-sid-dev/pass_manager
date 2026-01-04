@@ -13,3 +13,4 @@ def edit_selected(tree: ttk.Treeview, cipher: PasswordCipher):
     item = selected[0]
     id, login, password, description = tree.item(item, "values")
     open_edit_window(tree, id, item, login, password, description, cipher)
+

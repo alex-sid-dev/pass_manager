@@ -1,8 +1,9 @@
-from tkinter import ttk, Toplevel, messagebox
+from tkinter import ttk, Toplevel, messagebox, END
 
 from src.crypto_utils.crypto import PasswordCipher
 from src.database.create_password import create_password
 from src.models.passwords import Password
+from src.utils import generate_password
 
 
 def on_create(cipher: PasswordCipher):
@@ -20,8 +21,21 @@ def on_create(cipher: PasswordCipher):
     entry_login.pack(fill="x", pady=5)
 
     ttk.Label(frame, text="Пароль").pack(anchor="w")
-    entry_password = ttk.Entry(frame, show="*")
-    entry_password.pack(fill="x", pady=5)
+
+    pass_frame = ttk.Frame(frame)
+    pass_frame.pack(fill="x", pady=5)
+    entry_password = ttk.Entry(pass_frame)
+    entry_password.pack(side="left", fill="x", expand=True)
+    def on_generate():
+        new_password = generate_password(12)
+        entry_password.delete(0, END)
+        entry_password.insert(0, new_password)
+
+    ttk.Button(
+        pass_frame,
+        text="Сгенерировать",
+        command=on_generate
+    ).pack(side="right", padx=5)
 
     ttk.Label(frame, text="Описание").pack(anchor="w")
     entry_desc = ttk.Entry(frame)

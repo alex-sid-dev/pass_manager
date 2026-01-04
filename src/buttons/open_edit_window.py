@@ -1,7 +1,8 @@
-from tkinter import Toplevel, ttk
+from tkinter import Toplevel, ttk, END
 
 from src.database.update_password import update_password
 from src.models.passwords import PasswordForChange
+from src.utils import generate_password
 
 
 def open_edit_window(tree, id, item_id, login, password, description, cipher):
@@ -25,9 +26,24 @@ def open_edit_window(tree, id, item_id, login, password, description, cipher):
     e_login.pack(fill="x", pady=5)
 
     ttk.Label(frame, text="Пароль").pack(anchor="w")
-    e_pass = ttk.Entry(frame)
+
+    pass_frame = ttk.Frame(frame)
+    pass_frame.pack(fill="x", pady=5)
+
+    e_pass = ttk.Entry(pass_frame)
     e_pass.insert(0, password)
-    e_pass.pack(fill="x", pady=5)
+    e_pass.pack(side="left", fill="x", expand=True)
+
+    def on_generate():
+        new_password = generate_password(12)
+        e_pass.delete(0, END)
+        e_pass.insert(0, new_password)
+
+    ttk.Button(
+        pass_frame,
+        text="Сгенерировать",
+        command=on_generate
+    ).pack(side="right", padx=5)
 
     ttk.Label(frame, text="Описание").pack(anchor="w")
     e_desc = ttk.Entry(frame)

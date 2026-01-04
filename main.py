@@ -47,6 +47,9 @@ def ask_for_password(stored_hash):
     entry = ttk.Entry(login_window, show="*")
     entry.pack(pady=5)
     entry.focus()
+
+    entry.bind("<Return>", lambda event: check_password())
+
     ttk.Button(login_window, text="Войти", command=check_password).pack(pady=10)
 
     login_window.mainloop()
