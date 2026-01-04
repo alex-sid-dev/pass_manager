@@ -1,3 +1,4 @@
+import threading
 from tkinter import messagebox, Toplevel, ttk
 
 from src.buttons.on_delete import delete_selected
@@ -24,6 +25,10 @@ def on_read(cipher: PasswordCipher):
 
     entry_desc = ttk.Entry(search_frame)
     entry_desc.pack(side="left", padx=5, fill="x", expand=True)
+    entry_desc.focus_set()
+
+    # биндим Enter на поле
+    entry_desc.bind("<Return>", lambda event: search())
 
     ttk.Button(search_frame, text="Найти", width=10, command=lambda: search()).pack(side="left", padx=5)
 
@@ -86,10 +91,21 @@ def on_read(cipher: PasswordCipher):
         if region != "cell":
             return
 
-        col = tree.identify_column(event.x)  # "#1", "#2" ...
+        col = tree.identify_column(event.x)
         value = tree.item(selected_item, "values")[int(col[1:]) - 1]
         win.clipboard_clear()
         win.clipboard_append(value)
-        messagebox.showinfo("Скопировано", f"Скопировано: {value}")
+
+        # Тултип-подсказка
+        tooltip = ttk.Label(win, text=f"Скопировано: {value}", background="red")
+        tooltip.place(relx=0.5, rely=0, anchor="n")
+
+        # Скрываем через 1.5 секунды
+        def hide_tooltip():
+            tooltip.destroy()
+
+        threading.Timer(1.5, hide_tooltip).start()
+
+        tree.focus_set()  # возвращаем фокус
 
     tree.bind("<Double-1>", copy_cell)
