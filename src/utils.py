@@ -1,11 +1,16 @@
-import string
 import random
+import string
 
-def generate_password(length=12):
-    chars = (
-        string.ascii_lowercase +
-        string.ascii_uppercase +
-        string.digits +
-        "!@#$%^&*()-_=+[]{};:,.<>?"
-    )
-    return ''.join(random.choice(chars) for _ in range(length))
+
+class PasswordGenerator:
+    length = 12
+
+    @classmethod
+    def generate_password(cls):
+        chars = (
+                string.ascii_lowercase +
+                string.ascii_uppercase +
+                string.digits +
+                "!@#$%^&*()-_=+[]{};:,.<>?"
+        )
+        return ''.join(random.choice(chars) for _ in range(cls.length))

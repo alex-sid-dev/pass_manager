@@ -2,7 +2,7 @@ from tkinter import Toplevel, ttk, END
 
 from src.database.update_password import update_password
 from src.models.passwords import PasswordForChange
-from src.utils import generate_password
+from src.utils import PasswordGenerator
 
 
 def open_edit_window(tree, id, item_id, login, password, description, cipher):
@@ -35,7 +35,7 @@ def open_edit_window(tree, id, item_id, login, password, description, cipher):
     e_pass.pack(side="left", fill="x", expand=True)
 
     def on_generate():
-        new_password = generate_password(12)
+        new_password = PasswordGenerator.generate_password()
         e_pass.delete(0, END)
         e_pass.insert(0, new_password)
 

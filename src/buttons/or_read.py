@@ -21,7 +21,7 @@ def on_read(cipher: PasswordCipher):
     search_frame = ttk.Frame(frame)
     search_frame.pack(fill="x", pady=(0, 10))
 
-    ttk.Label(search_frame, text="Описание:").pack(side="left")
+    ttk.Label(search_frame, font=("Gotic", 12, "underline")).pack(side="left")
 
     entry_desc = ttk.Entry(search_frame)
     entry_desc.pack(side="left", padx=5, fill="x", expand=True)
