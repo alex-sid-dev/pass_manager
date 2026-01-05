@@ -56,6 +56,7 @@ def on_read(cipher: PasswordCipher):
 
     tree.pack(fill="both", expand=True)
 
+
     # --- Функция поиска ---
     def search():
         desc = entry_desc.get().strip()
@@ -109,3 +110,4 @@ def on_read(cipher: PasswordCipher):
         tree.focus_set()  # возвращаем фокус
 
     tree.bind("<Double-1>", copy_cell)
+    search()

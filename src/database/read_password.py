@@ -45,3 +45,16 @@ def read_passwords(description: str) -> List[PasswordForChange]:
 
     finally:
         conn.close()
+
+def get_all_passwords():
+    conn = sqlite3.connect(passwords_file_dir)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT login, password, description
+        FROM passwords
+    """)
+
+    rows = cursor.fetchall()
+    conn.close()
+    return rows

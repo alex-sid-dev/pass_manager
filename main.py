@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 from src.buttons.on_create import on_create
+from src.buttons.on_export import on_export
+from src.buttons.on_import import on_import
 from src.buttons.or_read import on_read
 from src.crypto_utils.crypto import PasswordCipher
 from src.crypto_utils.hash_password import hash_password
@@ -22,6 +24,8 @@ def open_main_window(cipher: PasswordCipher):
 
     ttk.Button(main_frame, text="Создать", command=lambda: on_create(cipher), width=20).pack(pady=5)
     ttk.Button(main_frame, text="Прочитать", command=lambda: on_read(cipher), width=20).pack(pady=5)
+    ttk.Button(main_frame, text="Импортировать", command=lambda: on_import(cipher), width=20).pack(pady=5)
+    ttk.Button(main_frame, text="Экспортировать", command=lambda: on_export(cipher), width=20).pack(pady=5)
 
     root.mainloop()
 
