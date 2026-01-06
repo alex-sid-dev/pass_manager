@@ -48,6 +48,30 @@ cd $HOME\projects\pass_manager
 
 ### 2. Клонирование репозитория
 
+Установка python(если не установлен)
+проверить можно командой
+
+```bash
+python --version
+```
+
+```bash
+winget install Python.Python.3.12
+```
+
+Установка git(если не установлен)
+проверить можно командой
+
+```bash
+git --version
+```
+
+```bash
+winget install Git.Git
+```
+
+Клонирование репозитория
+
 ```bash
 git clone https://github.com/alex-sid-dev/pass_manager.git
 ```
